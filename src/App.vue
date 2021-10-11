@@ -1,7 +1,9 @@
 <template>
   <div>
   <v-app>
-    <Lbnavbar/>
+    <template v-if="user == null">
+      <Lbnavbar/>
+    </template>
     <v-main>
       <router-view></router-view>
     </v-main>
@@ -14,15 +16,16 @@
 <script>
 import Lbnavbar from './views/Lbnavbar'
 import Lbfooter from './views/Lbfooter'
+import { mapState } from "vuex";
+
 export default {
   name: 'App',
-
   components: {
     Lbnavbar,Lbfooter
   },
-
-  data: () => ({
-    //
-  }),
+  data: () => ({ }),
+  computed: {
+    ...mapState(["user"]),
+  },
 };
 </script>

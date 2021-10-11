@@ -6,12 +6,13 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: { email: "viewThinnabol" },
+    user: 'test',
     error: null,
   },
   mutations: {
     SET_USER(state, userData) {
-      state.user = userData;
+      state.user = userData.username;
+      localStorage.setItem('userData', JSON.stringify(userData))
     },
   },
   actions: {
@@ -27,10 +28,14 @@ export default new Vuex.Store({
           data: userData,
         })
         .then((resp) => {
-          console.log(resp.data);
+          commit('SET_USER', resp.data.userData[0])
+        })
+        .catch((error) => {
+          console.log('**********')
+          // TODO set error msg
+          console.log(error.response.status)
+          console.log('**********')
         });
-
-      console.log(commit);
     },
   },
   modules: {},

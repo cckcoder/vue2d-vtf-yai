@@ -90,10 +90,16 @@ export default {
     handleLogin() {
       let formValid = this.$refs.form.validate();
       if (formValid) {
-        this.$store.dispatch("loginAction", {
-          email: this.email,
-          password: this.password,
-        });
+        this.$store
+          .dispatch("loginAction", {
+            email: this.email,
+            password: this.password,
+          })
+          .then(() => {
+            this.$router.push({
+              name: "Main",
+            });
+          });
       }
     },
   },
