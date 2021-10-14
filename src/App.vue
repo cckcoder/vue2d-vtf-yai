@@ -1,33 +1,33 @@
 <template>
   <div>
-  <v-app>
+    <v-app>
+      <template v-if="!getUserName">
+        <Lbnavbar />
+      </template>
 
-    <template v-if="user == null">
-      <Lbnavbar/>
-    </template>
-
-    <v-main>
-      <router-view></router-view>
-    </v-main>
-    <Lbfooter/>
-  </v-app>
-  
+      <v-main>
+        <router-view></router-view>
+      </v-main>
+      <Lbfooter />
+    </v-app>
   </div>
 </template>
 
 <script>
-import Lbnavbar from './views/Lbnavbar'
-import Lbfooter from './views/Lbfooter'
-import { mapState } from "vuex";
+import Lbnavbar from "./views/Lbnavbar";
+import Lbfooter from "./views/Lbfooter";
+import { mapState, mapGetters } from "vuex";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Lbnavbar,Lbfooter
+    Lbnavbar,
+    Lbfooter,
   },
-  data: () => ({ }),
+  data: () => ({}),
   computed: {
     ...mapState(["user"]),
+    ...mapGetters(["getUserName"]),
   },
 };
 </script>

@@ -12,7 +12,7 @@ export default new Vuex.Store({
   mutations: {
     SET_USER(state, userData) {
       state.user = userData.username;
-      localStorage.setItem('userData', JSON.stringify(userData))
+      localStorage.setItem("userData", JSON.stringify(userData));
     },
   },
   actions: {
@@ -22,18 +22,27 @@ export default new Vuex.Store({
       });
       commit("SET_USER", userData.username);
     },
-    loginAction({ commit }, userData) { axios .post("http://localhost:3001/api/userprofiles/login", { data: userData,
+    loginAction({ commit }, userData) {
+      axios
+        .post("http://localhost:3001/api/userprofiles/login", {
+          data: userData,
         })
         .then((resp) => {
-          commit('SET_USER', resp.data.userData[0])
+          commit("SET_USER", resp.data.userData[0]);
         })
         .catch((error) => {
-          console.log('**********')
+          console.log("**********");
           // TODO set error msg
-          console.log(error.response.status)
-          console.log('**********')
+          console.log(error.response.status);
+          console.log("**********");
         });
     },
+  },
+  getters: {
+    getUserName() {
+      let userData = JSON.parse(localStorage.getItem("userData"))
+      return userData.username
+    }
   },
   modules: {},
 });
