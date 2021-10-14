@@ -1,9 +1,11 @@
 <template>
   <div>
   <v-app>
+
     <template v-if="user == null">
       <Lbnavbar/>
     </template>
+
     <v-main>
       <router-view></router-view>
     </v-main>

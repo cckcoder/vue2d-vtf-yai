@@ -67,7 +67,6 @@
         </v-container>
       </v-content>
     </v-app>
-    {{ $data }}
   </div>
 </template>
 
@@ -89,6 +88,7 @@ export default {
   methods: {
     handleLogin() {
       let formValid = this.$refs.form.validate();
+
       if (formValid) {
         this.$store
           .dispatch("loginAction", {
@@ -101,6 +101,7 @@ export default {
             });
           });
       }
+
     },
   },
 };

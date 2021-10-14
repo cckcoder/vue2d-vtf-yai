@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: 'test',
+    user: null,
     error: null,
   },
   mutations: {
@@ -22,10 +22,7 @@ export default new Vuex.Store({
       });
       commit("SET_USER", userData.username);
     },
-    loginAction({ commit }, userData) {
-      axios
-        .post("http://localhost:3001/api/userprofiles/login", {
-          data: userData,
+    loginAction({ commit }, userData) { axios .post("http://localhost:3001/api/userprofiles/login", { data: userData,
         })
         .then((resp) => {
           commit('SET_USER', resp.data.userData[0])
