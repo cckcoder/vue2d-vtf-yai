@@ -16,7 +16,7 @@
 <script>
 import Lbnavbar from "./views/Lbnavbar";
 import Lbfooter from "./views/Lbfooter";
-import { mapState, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "App",
@@ -26,7 +26,6 @@ export default {
   },
   data: () => ({}),
   computed: {
-    ...mapState(["user"]),
     ...mapGetters(["getUserName"]),
   },
 };

@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: null,
+    user: "test",
     error: null,
   },
   mutations: {
@@ -40,9 +40,11 @@ export default new Vuex.Store({
   },
   getters: {
     getUserName() {
-      let userData = JSON.parse(localStorage.getItem("userData"))
-      return userData.username
-    }
+      let userData = JSON.parse(localStorage.getItem("userData"));
+      if (userData) {
+        return userData.username;
+      }
+    },
   },
   modules: {},
 });
