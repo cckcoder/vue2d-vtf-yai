@@ -37,6 +37,9 @@ export default new Vuex.Store({
           console.log("**********");
         });
     },
+    addVideoInfo({ commet }, data) {
+      axios.post()
+    }
   },
   getters: {
     getUserName() {
