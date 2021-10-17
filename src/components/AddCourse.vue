@@ -19,7 +19,56 @@
             </div>
             <div class="text--primary">
               <v-row>
-                <v-btn depressed outlined small>Video</v-btn>
+                <v-dialog v-model="dialog" persistent max-width="600px">
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      class="py-4"
+                      depressed
+                      outlined
+                      x-small
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      <v-icon> mdi-youtube </v-icon>
+                      Video
+                    </v-btn>
+                  </template>
+                  <v-card>
+                    <v-toolbar color="primary" dark> Add Video </v-toolbar>
+                    <v-card-text>
+                      <v-container>
+                        <v-row>
+                          <v-col cols="12">
+                            <v-text-field
+                              v-if="dialog"
+                              autofocus
+                              label="Video URL"
+                              required
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="12">
+                            <!--  What did you learn from this video?  -->
+                            <v-textarea dense rows="3">
+                              <template v-slot:label>
+                                <div>What did you learn from this video?</div>
+                              </template>
+                            </v-textarea>
+                          </v-col>
+                        </v-row>
+                      </v-container>
+                      <small>*indicates required field</small>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="blue darken-1" text @click="dialog = false">
+                        Close
+                      </v-btn>
+                      <v-btn color="blue darken-1" text @click="dialog = false">
+                        Save
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
               </v-row>
             </div>
           </v-card-text>
@@ -32,7 +81,13 @@
 <script>
 export default {
   data: () => ({
-    reveal: false,
+    dialog: false,
   }),
 };
 </script>
+
+<style lang="css" scoped>
+.v-text-field >>> label {
+    font-size: 0.8em;
+}
+</style>

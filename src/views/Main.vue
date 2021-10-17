@@ -14,7 +14,7 @@
       </v-container>
     </v-app-bar>
 
-    <v-main class="grey lighten-3">
+    <v-main class="grey lighten-3 pt-8">
       <v-container>
         <v-row>
           <v-col cols="2">

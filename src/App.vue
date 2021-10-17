@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app>
-      <template v-if="!getUserName">
+      <template v-if="!user">
         <Lbnavbar />
       </template>
 
@@ -16,7 +16,7 @@
 <script>
 import Lbnavbar from "./views/Lbnavbar";
 import Lbfooter from "./views/Lbfooter";
-import { mapGetters } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "App",
@@ -26,6 +26,7 @@ export default {
   },
   data: () => ({}),
   computed: {
+    ...mapState(["user"]),
     ...mapGetters(["getUserName"]),
   },
 };
