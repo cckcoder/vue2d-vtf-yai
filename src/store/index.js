@@ -37,8 +37,10 @@ export default new Vuex.Store({
           console.log("**********");
         });
     },
-    addVideoInfo({ commet }, data) {
-      axios.post()
+    addVideoInfo({ commit }, data) {
+      console.log(data)
+      console.log(commit)
+      //axios.post()
     }
   },
   getters: {

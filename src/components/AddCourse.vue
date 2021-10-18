@@ -97,8 +97,8 @@ export default {
     disable: true,
     videoUrl: "",
     videoDescript: "",
-    userId: '',
-    videoInfo: {}
+    userId: "",
+    videoInfo: {},
   }),
   methods: {
     submitVideoInfo() {
@@ -107,16 +107,19 @@ export default {
         videoUrl: this.videoUrl,
         videoDescript: this.videoDescript,
       };
-      this.userId = this.getUserId()
-      this.$store.dispatch('addVideoInfo', {
+      this.userId = this.getUserId();
+      this.$store.dispatch("addVideoInfo", {
         userId: this.userId,
-        videoInfo: this.videoInfo
-      })
+        videoInfo: this.videoInfo,
+      });
+
+      this.videoUrl = "";
+      this.videoDescript = "";
     },
     getUserId() {
       let userData = JSON.parse(localStorage.getItem("userData"));
-      return userData.id
-    }
+      return userData.id;
+    },
   },
   computed: {
     isBtnDisable() {
