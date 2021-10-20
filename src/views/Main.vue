@@ -39,7 +39,7 @@
 
           <v-col>
             <v-sheet min-height="70vh" rounded="lg">
-              <AddCourse/>
+              <AddCourse />
             </v-sheet>
           </v-col>
         </v-row>
@@ -49,15 +49,22 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import AddCourse from "@/components/AddCourse";
 
 export default {
   components: {
     AddCourse,
   },
+  mounted() {
+    this.$store.dispatch("fetchVideoList", this.getUserId);
+  },
   data: () => ({
     links: ["Home", "Browse", "Profile"],
     sideLink: ["Category", "Skill"],
   }),
+  computed: {
+    ...mapGetters(["getUserId"]),
+  },
 };
 </script>

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import VideoServices from "@/services/VideoServices.js";
 
 Vue.use(Vuex);
 
@@ -8,16 +9,19 @@ export default new Vuex.Store({
   state: {
     user: "test",
     error: null,
-    videoData: []
+    videoData: [],
   },
   mutations: {
     SET_USER(state, userData) {
       state.user = userData.username;
       localStorage.setItem("userData", JSON.stringify(userData));
     },
+    SET_VIDEO_DATA(state, videoData) {
+      state.videoData.push(videoData);
+    },
     UPDATE_VIDEO_DATA(state, videoData) {
-      state.videoData.push(videoData)
-    }
+      state.videoData.push(videoData);
+    },
   },
   actions: {
     registerAction({ commit }, userData) {
@@ -54,6 +58,12 @@ export default new Vuex.Store({
           console.log("**********");
         });
     },
+    fetchVideoList({ commit }, userId) {
+      console.log(commit);
+      VideoServices.getVideoList(userId).then(({ data }) => {
+        commit("SET_VIDEO_DATA", data);
+      });
+    },
   },
   getters: {
     getUserName() {
@@ -61,6 +71,10 @@ export default new Vuex.Store({
       if (userData) {
         return userData.username;
       }
+    },
+    getUserId() {
+      let userData = JSON.parse(localStorage.getItem("userData"));
+      return userData.id;
     },
   },
   modules: {},

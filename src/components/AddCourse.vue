@@ -87,11 +87,25 @@
         </v-card>
       </v-menu>
     </v-row>
+
+    <!-- Show Content -->
+    <v-row class="mt-8">
+      <v-col sm="3" v-for="index in 12" :key="index">
+        <ContentCard />
+      </v-col>
+    </v-row>
+
   </v-container>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import ContentCard from "@/components/ContentCard";
+
 export default {
+  components: {
+    ContentCard
+  },
   data: () => ({
     dialog: false,
     disable: true,
@@ -107,7 +121,7 @@ export default {
         videoUrl: this.videoUrl,
         videoDescript: this.videoDescript,
       };
-      this.userId = this.getUserId();
+      this.userId = this.getUserId;
 
       this.$store.dispatch("addVideoInfo", {
         userId: this.userId,
@@ -117,15 +131,12 @@ export default {
       this.videoUrl = "";
       this.videoDescript = "";
     },
-    getUserId() {
-      let userData = JSON.parse(localStorage.getItem("userData"));
-      return userData.id;
-    },
   },
   computed: {
     isBtnDisable() {
       return this.videoUrl ? false : true;
     },
+    ...mapGetters(['getUserId'])
   },
 };
 </script>
