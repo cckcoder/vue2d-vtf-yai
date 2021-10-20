@@ -108,6 +108,7 @@ export default {
         videoDescript: this.videoDescript,
       };
       this.userId = this.getUserId();
+
       this.$store.dispatch("addVideoInfo", {
         userId: this.userId,
         videoInfo: this.videoInfo,
@@ -129,8 +130,4 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
-.v-text-field >>> label {
-  font-size: 0.8em;
-}
-</style>
+<style lang="css" scoped></style>

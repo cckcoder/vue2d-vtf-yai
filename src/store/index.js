@@ -8,12 +8,16 @@ export default new Vuex.Store({
   state: {
     user: "test",
     error: null,
+    videoData: []
   },
   mutations: {
     SET_USER(state, userData) {
       state.user = userData.username;
       localStorage.setItem("userData", JSON.stringify(userData));
     },
+    UPDATE_VIDEO_DATA(state, videoData) {
+      state.videoData.push(videoData)
+    }
   },
   actions: {
     registerAction({ commit }, userData) {
@@ -38,10 +42,18 @@ export default new Vuex.Store({
         });
     },
     addVideoInfo({ commit }, data) {
-      console.log(data)
-      console.log(commit)
-      //axios.post()
-    }
+      console.log(commit);
+
+      axios
+        .post(`http://localhost:3001/api/userprofiles/video/${data.userId}`, {
+          data: data.videoInfo,
+        })
+        .then((resp) => {
+          console.log("**********");
+          console.log(resp);
+          console.log("**********");
+        });
+    },
   },
   getters: {
     getUserName() {
