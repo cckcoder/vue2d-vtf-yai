@@ -130,8 +130,7 @@
 
       <validation-provider
         v-slot="{ errors }"
-        name="province"
-        rules="required|max:15"
+        name="province" rules="required|max:15"
       >
         <v-text-field
           v-model="province"

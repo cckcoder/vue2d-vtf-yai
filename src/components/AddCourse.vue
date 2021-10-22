@@ -90,7 +90,7 @@
 
     <!-- Show Content -->
     <v-row class="mt-8">
-      <v-col sm="3" v-for="index in 12" :key="index">
+      <v-col sm="3" v-for="index in 4" :key="index">
         <ContentCard />
       </v-col>
     </v-row>
