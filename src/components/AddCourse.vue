@@ -139,10 +139,16 @@ export default {
   },
   computed: {
     isBtnDisable() {
-      return this.videoUrl ? false : true;
+      if (this.videoUrl && this.videoDescript) {
+        if (this.videoDescript.length < 200)
+        return false;
+      }
+      return true;
     },
     textFieldCheck() {
-      return (this.videoDescript != 0 && this.videoDescript <= 200) ? false : true;
+      return this.videoDescript != 0 && this.videoDescript <= 200
+        ? false
+        : true;
     },
     ...mapGetters(["getUserId"]),
     ...mapState(["videoData"]),
