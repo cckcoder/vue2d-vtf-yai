@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row class="justify-center mt-2">
       <v-responsive max-width="250">
         <v-text-field dense flat hide-details solo-inverted></v-text-field>
@@ -8,8 +8,7 @@
       <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn text class="ml-3" v-bind="attrs" v-on="on">
-            <v-icon> mdi-plus </v-icon>
-          </v-btn>
+            <v-icon> mdi-plus </v-icon> </v-btn>
         </template>
         <v-card class="mx-auto" max-width="344">
           <v-card-text>
@@ -36,10 +35,10 @@
                   <v-card>
                     <v-toolbar color="primary" dark> Add Video </v-toolbar>
                     <v-card-text>
-                      <v-container>
+                      <v-container fluid>
                         <v-row>
-                          <v-form ref="formContent">
-                            <v-col cols="12">
+                          <v-form class="form-max-width" ref="formContent">
+                            <v-col>
                               <v-text-field
                                 v-model="videoUrl"
                                 v-if="dialog"
@@ -48,7 +47,7 @@
                                 required
                               ></v-text-field>
                             </v-col>
-                            <v-col cols="12">
+                            <v-col class="mb-3">
                               <!--  What did you learn from this video?  -->
                               <v-textarea
                                 dense
@@ -60,6 +59,17 @@
                                   <div>What did you learn from this video?</div>
                                 </template>
                               </v-textarea>
+                            </v-col>
+                            <v-col class="mb-3">
+                              <v-autocomplete
+                                v-model="tagSelect"
+                                :items="videoTags"
+                                dense
+                                chips
+                                small-chips
+                                label="Tags"
+                                multiple
+                              ></v-autocomplete>
                             </v-col>
                           </v-form>
                         </v-row>
@@ -97,6 +107,7 @@
         />
       </v-col>
     </v-row>
+    {{ tagSelect }}
   </v-container>
 </template>
 
@@ -115,6 +126,7 @@ export default {
     videoDescript: "",
     userId: "",
     videoInfo: {},
+    tagSelect: [],
     textAreaRule: [
       (v) =>
         (v || "").length <= 200 || "Description must be 200 characters or less",
@@ -149,9 +161,13 @@ export default {
       return true;
     },
     ...mapGetters(["getUserId"]),
-    ...mapState(["videoData"]),
+    ...mapState(["videoData", "videoTags"]),
   },
 };
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.form-max-width {
+  width: 100%
+}
+</style>

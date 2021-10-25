@@ -10,6 +10,44 @@ export default new Vuex.Store({
     user: "test",
     error: null,
     videoData: [],
+    videoTags: [
+      "Data Science",
+      "Data Engineer",
+      "Data Analytic",
+      "Digital Marketing",
+      "Influencer",
+      "Youtuber",
+      "AI",
+      "IOT",
+      "Machine Learning",
+      "VR/AR",
+      "Graphic Design",
+      "Video Editor",
+      "Content Creator",
+      "Tester",
+      "BA (Business Analyst)",
+      "SA (System Analyst)",
+      "UX/UI",
+      "Developer",
+      "Product Owner",
+      "Hacker",
+      "Scrum Master",
+      "Agile Coach",
+      "ขายของออนไลน์",
+      "ทำอาหาร",
+      "ศิลปะ",
+      "ดนตรี",
+      "ก่อสร้าง",
+      "ซ่อมอุปกรณ์",
+      "เกษตร",
+      "การสอน",
+      "พิธีกร/นักพูด",
+      "นักแสดง",
+      "แพทย์",
+      "พยาบาล/ดูแลผู้ป่วย",
+      "ติดต่อประสานงาน",
+      "อื่นๆ",
+    ],
   },
   mutations: {
     SET_USER(state, userData) {
@@ -51,7 +89,7 @@ export default new Vuex.Store({
           data: data.videoInfo,
         })
         .then((resp) => {
-          commit('UPDATE_VIDEO_DATA', resp.data)
+          commit("UPDATE_VIDEO_DATA", resp.data);
         });
     },
     fetchVideoList({ commit }, userId) {
@@ -71,7 +109,7 @@ export default new Vuex.Store({
     getUserId() {
       let userData = JSON.parse(localStorage.getItem("userData"));
       return userData.id;
-    }
+    },
   },
   modules: {},
 });
