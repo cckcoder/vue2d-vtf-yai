@@ -53,6 +53,7 @@
                               <v-textarea
                                 dense
                                 rows="3"
+                                :rules="textAreaRule"
                                 v-model="videoDescript"
                               >
                                 <template v-slot:label>
@@ -87,24 +88,25 @@
         </v-card>
       </v-menu>
     </v-row>
-
     <!-- Show Content -->
     <v-row class="mt-8">
-      <v-col sm="3" v-for="index in 4" :key="index">
-        <ContentCard />
+      <v-col sm="3" v-for="value in videoData" :key="value.videoUrl">
+        <ContentCard
+          :videoUrl="value.videoUrl"
+          :videoDescript="value.videoDescript"
+        />
       </v-col>
     </v-row>
-
   </v-container>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from "vuex";
 import ContentCard from "@/components/ContentCard";
 
 export default {
   components: {
-    ContentCard
+    ContentCard,
   },
   data: () => ({
     dialog: false,
@@ -113,6 +115,10 @@ export default {
     videoDescript: "",
     userId: "",
     videoInfo: {},
+    textAreaRule: [
+      (v) =>
+        (v || "").length <= 200 || "Description must be 200 characters or less",
+    ],
   }),
   methods: {
     submitVideoInfo() {
@@ -122,7 +128,6 @@ export default {
         videoDescript: this.videoDescript,
       };
       this.userId = this.getUserId;
-
       this.$store.dispatch("addVideoInfo", {
         userId: this.userId,
         videoInfo: this.videoInfo,
@@ -136,7 +141,11 @@ export default {
     isBtnDisable() {
       return this.videoUrl ? false : true;
     },
-    ...mapGetters(['getUserId'])
+    textFieldCheck() {
+      return (this.videoDescript != 0 && this.videoDescript <= 200) ? false : true;
+    },
+    ...mapGetters(["getUserId"]),
+    ...mapState(["videoData"]),
   },
 };
 </script>

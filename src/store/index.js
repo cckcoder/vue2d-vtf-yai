@@ -17,7 +17,7 @@ export default new Vuex.Store({
       localStorage.setItem("userData", JSON.stringify(userData));
     },
     SET_VIDEO_DATA(state, videoData) {
-      state.videoData.push(videoData);
+      state.videoData = videoData;
     },
     UPDATE_VIDEO_DATA(state, videoData) {
       state.videoData.push(videoData);
@@ -46,16 +46,12 @@ export default new Vuex.Store({
         });
     },
     addVideoInfo({ commit }, data) {
-      console.log(commit);
-
       axios
         .post(`http://localhost:3001/api/userprofiles/video/${data.userId}`, {
           data: data.videoInfo,
         })
         .then((resp) => {
-          console.log("**********");
-          console.log(resp);
-          console.log("**********");
+          commit('UPDATE_VIDEO_DATA', resp.data)
         });
     },
     fetchVideoList({ commit }, userId) {
@@ -75,7 +71,7 @@ export default new Vuex.Store({
     getUserId() {
       let userData = JSON.parse(localStorage.getItem("userData"));
       return userData.id;
-    },
+    }
   },
   modules: {},
 });
