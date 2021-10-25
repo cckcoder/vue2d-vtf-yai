@@ -107,7 +107,6 @@
         />
       </v-col>
     </v-row>
-    {{ tagSelect }}
   </v-container>
 </template>
 
@@ -138,15 +137,16 @@ export default {
       this.videoInfo = {
         videoUrl: this.videoUrl,
         videoDescript: this.videoDescript,
+        tags: this.tagSelect
       };
+
       this.userId = this.getUserId;
       this.$store.dispatch("addVideoInfo", {
         userId: this.userId,
         videoInfo: this.videoInfo,
       });
 
-      this.videoUrl = "";
-      this.videoDescript = "";
+      this.$refs.formContent.reset();
     },
     cancelForm() {
       this.$refs.formContent.reset();
