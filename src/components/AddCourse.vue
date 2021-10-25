@@ -38,7 +38,7 @@
                     <v-card-text>
                       <v-container>
                         <v-row>
-                          <v-form>
+                          <v-form ref="formContent">
                             <v-col cols="12">
                               <v-text-field
                                 v-model="videoUrl"
@@ -68,7 +68,7 @@
                     </v-card-text>
                     <v-card-actions>
                       <v-spacer></v-spacer>
-                      <v-btn color="blue darken-1" text @click="dialog = false">
+                      <v-btn color="blue darken-1" text @click="cancelForm">
                         Close
                       </v-btn>
                       <v-btn
@@ -136,19 +136,17 @@ export default {
       this.videoUrl = "";
       this.videoDescript = "";
     },
+    cancelForm() {
+      this.$refs.formContent.reset();
+      this.dialog = false;
+    },
   },
   computed: {
     isBtnDisable() {
       if (this.videoUrl && this.videoDescript) {
-        if (this.videoDescript.length < 200)
-        return false;
+        if (this.videoDescript.length <= 200) return false;
       }
       return true;
-    },
-    textFieldCheck() {
-      return this.videoDescript != 0 && this.videoDescript <= 200
-        ? false
-        : true;
     },
     ...mapGetters(["getUserId"]),
     ...mapState(["videoData"]),
